@@ -7,12 +7,6 @@ public class Banner
     public string FetchBanner(string displayName, string appId, string launcherName)
     {
         Storage storage = new($"banners/{displayName}_{launcherName}_{appId}.jpg");
-        if (storage.Exists())
-        {
-            Console.WriteLine($"Banner for {displayName} from {launcherName} already exists");
-            return storage.GetPath();
-        }
-        
         string bannerLocation = "";
         switch (launcherName)
         {

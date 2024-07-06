@@ -111,22 +111,37 @@ public class Steam : ILauncher
             }
         }
         
+        var storage = new Storage("games/games.json");
+        var obj = storage.Read();
+        var games = obj["games"].AsArray();
         foreach (GameInfo game in tempGames)
         {
             if (ILauncher.InstalledGames.Any(x => x.DisplayName == game.DisplayName) || ILauncher.InstalledGames.Any(x => x.GameId == game.GameId))
             {
                 continue;
             }
-            var storage = new Storage("games/games.json");
-            var obj = storage.Read();
-            var games = obj["games"].AsArray();
-            games.Add(JsonNode.Parse(game.ToJson()));
             
-            obj["games"] = games;
-            storage.Write(obj);
-                
+            games.Add(JsonNode.Parse(game.ToJson()));
             ILauncher.InstalledGames.Add(game);
         }
+
+        foreach (GameInfo game in ILauncher.InstalledGames)
+        {
+            if (game.LauncherName != GetLauncherName())
+            {
+                continue;
+            }
+            
+            // check if game is still installed
+            if (!Directory.Exists(game.GameDir))
+            {
+                games.Remove(games.FirstOrDefault(x => x["GameId"].GetValue<string>() == game.GameId));
+                ILauncher.InstalledGames.Remove(game);
+            }
+        }
+        
+        obj["games"] = games;
+        storage.Write(obj);
     }
 
     public void LaunchGame(GameInfo info)

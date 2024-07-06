@@ -24,4 +24,9 @@ public struct GameInfo
     {
         return JsonSerializer.Serialize(this);
     }
+    
+    public void DownloadBanner()
+    {
+        new Banner().FetchBanner(DisplayName, GameId, LauncherName);
+    }
 }

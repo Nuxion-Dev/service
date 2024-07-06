@@ -47,8 +47,8 @@ public interface ILauncher
             string launchArgs = game["LaunchArgs"] == null ? "null" : game["LaunchArgs"].GetValue<string>();
             string exeFile = game["ExeFile"] == null ? "null" : game["ExeFile"].GetValue<string>();
             string gameDir = game["GameDir"].GetValue<string>();
-            
-            InstalledGames.Add(new GameInfo
+
+            GameInfo info = new GameInfo
             {
                 DisplayName = displayName,
                 BannerImage = bannerImage,
@@ -62,7 +62,9 @@ public interface ILauncher
                 LaunchArgs = launchArgs,
                 ExeFile = exeFile,
                 GameDir = gameDir
-            });
+            };
+            InstalledGames.Add(info);
+            info.DownloadBanner();
         }
         
         RegisteredLaunchers = new List<ILauncher>();
