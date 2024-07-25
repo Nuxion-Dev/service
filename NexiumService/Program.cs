@@ -11,13 +11,24 @@ public class Program
 
         builder.Services.AddHostedService<Worker>();
         builder.Services.AddWindowsService();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAnyOrigin",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+        });
         builder.Services.AddControllers();
-        
+
         ILauncher.Load();
-        ILauncher.Launch("Bopl Battle");
+        //ILauncher.Launch("Bopl Battle");
         
         var host = builder.Build();
         host.MapControllers();
+        host.UseCors("AllowAnyOrigin");
         host.Run();
     }
 }

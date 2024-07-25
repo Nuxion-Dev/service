@@ -91,6 +91,11 @@ public interface ILauncher
         RegisteredLaunchers.Add(launcher);
     }
     
+    public static ILauncher GetLauncher(string name)
+    {
+        return RegisteredLaunchers.Find(x => x.GetLauncherName() == name);
+    }
+    
     public static void Launch(string name)
     {
         var game = InstalledGames.Find(x => x.GameId == name || x.DisplayName == name);
@@ -99,5 +104,25 @@ public interface ILauncher
         if (launcher == null) return;
         
         launcher.LaunchGame(game);
+    }
+    
+    public static GameInfo GetGame(string gameId)
+    {
+        return InstalledGames.Find(x => x.GameId == gameId);
+    }
+    
+    public static void UpdateGame(GameInfo game)
+    {
+        var oldGame = InstalledGames.Find(x => x.GameId == game.GameId);
+        InstalledGames.Remove(oldGame);
+        InstalledGames.Add(game);
+        
+        var storage = new Storage("games/games.json");
+        var obj = storage.Read();
+        var games = obj["games"].AsArray();
+        games.Remove(games.FirstOrDefault(x => x["GameId"].GetValue<string>() == game.GameId));
+        games.Add(JsonNode.Parse(game.ToJson()));
+        obj["games"] = games;
+        storage.Write(obj);
     }
 }

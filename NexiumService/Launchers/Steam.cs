@@ -69,6 +69,7 @@ public class Steam : ILauncher
     {
         string[] steamPaths = GetLibraryFolders();
         List<GameInfo> tempGames = new List<GameInfo>();
+        Banner banner = new();
         foreach (string steamPath in steamPaths) {
             string steamAppsPath = steamPath + @"\steamapps";
             
@@ -95,7 +96,7 @@ public class Steam : ILauncher
                 
                 if (_blacklistedAppId.Contains(int.Parse(appId))) continue;
                 
-                string bannerLocation = new Banner().FetchBanner(name, appId, "Steam");
+                string bannerLocation = banner.FetchBanner(name, appId, "Steam");
                 
                 tempGames.Add(new GameInfo
                 {
@@ -125,18 +126,21 @@ public class Steam : ILauncher
             ILauncher.InstalledGames.Add(game);
         }
 
-        foreach (GameInfo game in ILauncher.InstalledGames)
+        foreach (GameInfo game in ILauncher.InstalledGames.ToList())
         {
             if (game.LauncherName != GetLauncherName())
             {
                 continue;
             }
             
-            // check if game is still installed
             if (!Directory.Exists(game.GameDir))
             {
+                string bannerImageFile = game.BannerImage;
+                Storage bannerImage = new Storage(game.BannerImage);
+                bannerImage.Delete();
                 games.Remove(games.FirstOrDefault(x => x["GameId"].GetValue<string>() == game.GameId));
                 ILauncher.InstalledGames.Remove(game);
+                
             }
         }
         

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FowevTqHU1AludLWmLKmnE1apb28lfWddNK5vaZp+68Aj5SyVlrSuo2jEptzDlJEXPZ1d/h0rwWLJoLEdv9a+A==",
+  "dgSpecHash": "odYwsTcZg4Ze7kb5IaNYXE2jgoM7knwKtLl2iLxItHNEjW1RHmy1l11OUtuo1GUqTKbICGGv5yFJHL3DyBg5Hw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj",
+  "projectFilePath": "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\NexiumService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lrvad\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\2.2.0\\microsoft.aspnetcore.connections.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\lrvad\\.nuget\\packages\\microsoft.aspnetcore.hosting\\2.2.7\\microsoft.aspnetcore.hosting.2.2.7.nupkg.sha512",
