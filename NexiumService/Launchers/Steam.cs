@@ -12,7 +12,7 @@ public class Steam : ILauncher
     private int[] _blacklistedAppId =
     {
         228980, 231350, 1493710, 1391110, 1070560, 1826330, 1113280, 1245040, 1420170, 1580130,
-        1887720, 1628350, 2348590, 2180100
+        1887720, 1628350, 2348590, 2180100,992490, 613220, 250820
     };
     
     public string GetLauncherName()
@@ -90,6 +90,10 @@ public class Steam : ILauncher
                 }
                 
                 string install_dir = Regex.Match(acfContent, "\"installdir\"\\s*\"(.+?)\"").Groups[1].Value;
+                string gameSizeStr = Regex.Match(acfContent, "\"SizeOnDisk\"\\s*\"(.+?)\"").Groups[1].Value;
+                if (string.IsNullOrEmpty(gameSizeStr)) continue;
+                
+                long gameSize = long.Parse(gameSizeStr);
                 if (string.IsNullOrEmpty(name)) continue;
                 if (string.IsNullOrEmpty(install_dir)) continue;
                 if (string.IsNullOrEmpty(appId)) continue;
@@ -100,10 +104,13 @@ public class Steam : ILauncher
                 
                 tempGames.Add(new GameInfo
                 {
+                    Name = name,
                     DisplayName = name,
                     BannerImage = bannerLocation,
                     LastPlayed = 0,
+                    ShortcutSlot = -1,
                     LauncherName = "Steam",
+                    GameSize = gameSize,
                     GameId = appId,
                     Favourite = false,
                     LauncherLocation = steamPath,
@@ -128,19 +135,17 @@ public class Steam : ILauncher
 
         foreach (GameInfo game in ILauncher.InstalledGames.ToList())
         {
-            if (game.LauncherName != GetLauncherName())
-            {
-                continue;
-            }
+            if (game.LauncherName != GetLauncherName()) continue;
             
             if (!Directory.Exists(game.GameDir))
             {
-                string bannerImageFile = game.BannerImage;
-                Storage bannerImage = new Storage(game.BannerImage);
-                bannerImage.Delete();
-                games.Remove(games.FirstOrDefault(x => x["GameId"].GetValue<string>() == game.GameId));
+                string? bannerImageFile = game.BannerImage;
+                games.Remove(games.FirstOrDefault(x => x["GameId"] != null && x["GameId"].GetValue<string>() == game.GameId));
                 ILauncher.InstalledGames.Remove(game);
-                
+                if (bannerImageFile == null) continue;
+
+                Storage bannerImage = new Storage(bannerImageFile);
+                bannerImage.Delete();
             }
         }
         
@@ -150,6 +155,11 @@ public class Steam : ILauncher
 
     public void LaunchGame(GameInfo info)
     {
+        if (ILauncher.IsGameRunning(info.DisplayName))
+        {
+            return;
+        }
+        
         var processInfo = new ProcessStartInfo
         {
             FileName = GetLauncherLocation() + @"\steam.exe",
@@ -159,6 +169,13 @@ public class Steam : ILauncher
             CreateNoWindow = true
         };
         
-        Process.Start(processInfo);
+        Process? process = Process.Start(processInfo);
+        if (process == null) return;
+        
+        ILauncher.RunningGames.Add(info);
+        process.WaitForExitAsync().ContinueWith(_ =>
+        {
+            ILauncher.RunningGames.Remove(info);
+        });
     }
 }

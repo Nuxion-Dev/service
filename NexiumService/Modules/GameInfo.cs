@@ -1,13 +1,18 @@
 ﻿using System.Text.Json;
+using NexiumService.Launchers;
+using NexiumService.Utils;
 
 namespace NexiumService.Modules;
 
 public struct GameInfo
 {
+    public string Name { get; set; }
     public string DisplayName { get; set; }
-    public string BannerImage { get; set; }
+    public string? BannerImage { get; set; }
     public long LastPlayed { get; set; }
     public bool Favourite { get; set; }
+    public bool CustomBanner { get; set; }
+    public int ShortcutSlot { get; set; }
     
     public string LauncherLocation { get; set; }
     public string LauncherName { get; set; }
@@ -22,11 +27,22 @@ public struct GameInfo
     
     public string ToJson()
     {
-        return JsonSerializer.Serialize(this);
+        string? json = JsonSerializer.Serialize(this);
+        return json;
     }
     
-    public void DownloadBanner()
+    public string? DownloadBanner()
     {
-        new Banner().FetchBanner(DisplayName, GameId, LauncherName);
+        string? image = new Banner().FetchBanner(DisplayName, GameId, LauncherName);
+        BannerImage = image;
+        //this.Save();
+
+        return BannerImage;
+    }
+
+    public void Save()
+    {
+        Console.WriteLine("Saving game info for " + DisplayName);
+        ILauncher.UpdateGame(this);
     }
 }

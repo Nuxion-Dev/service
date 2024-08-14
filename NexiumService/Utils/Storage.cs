@@ -22,7 +22,8 @@ public class Storage
         {
             "cache",
             "cache/banners",
-            "cache/games"
+            "cache/games",
+            "cache/clips"
         };
         
         foreach (var directory in directories)
@@ -44,6 +45,11 @@ public class Storage
             }
         }
     }
+    
+    public void CreateDir()
+    {
+        Directory.CreateDirectory(_path);
+    }
 
     public void Write(JsonObject data)
     {
@@ -64,6 +70,21 @@ public class Storage
         }
         
         return JsonNode.Parse(data).AsObject();
+    }
+    
+    public string ReadString()
+    {
+        if (!File.Exists(_path))
+        {
+            return "";
+        }
+        
+        return File.ReadAllText(_path);
+    }
+    
+    public List<String> ReadDir()
+    {
+        return Directory.GetFiles(_path).ToList();
     }
     
     public bool Exists()

@@ -1,7 +1,72 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {
+    "net7.0-windows7.0": {
+      "Accord/3.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Accord.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Accord.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/Accord.targets": {}
+        }
+      },
+      "Accord.Video/3.8.0": {
+        "type": "package",
+        "dependencies": {
+          "Accord": "3.8.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Accord.Video.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Accord.Video.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Accord.Video.FFMPEG/3.8.0": {
+        "type": "package",
+        "dependencies": {
+          "Accord": "3.8.0",
+          "Accord.Video": "3.8.0"
+        },
+        "build": {
+          "build/Accord.Video.FFMPEG.targets": {}
+        }
+      },
+      "Accord.Video.FFMPEG.x64/3.8.0": {
+        "type": "package",
+        "dependencies": {
+          "Accord": "3.8.0",
+          "Accord.Video": "3.8.0"
+        },
+        "build": {
+          "build/Accord.Video.FFMPEG.x64.targets": {}
+        }
+      },
+      "CliWrap/3.6.6": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/CliWrap.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/CliWrap.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Connections.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -906,6 +971,44 @@
           }
         }
       },
+      "Microsoft.Win32.SystemEvents/7.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "SharpAvi/3.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0-windows7.0/SharpAvi.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0-windows7.0/SharpAvi.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "System.Buffers/4.5.0": {
         "type": "package",
         "compile": {
@@ -952,6 +1055,31 @@
             "rid": "win"
           },
           "runtimes/win/lib/net7.0/System.Diagnostics.EventLog.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "System.Drawing.Common/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "7.0.0"
+        },
+        "compile": {
+          "lib/net7.0/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/System.Drawing.Common.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/System.Drawing.Common.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -1103,10 +1231,178 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "System.Windows.Extensions/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "7.0.0"
+        },
+        "compile": {
+          "lib/net7.0/System.Windows.Extensions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/System.Windows.Extensions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/System.Windows.Extensions.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
       }
     }
   },
   "libraries": {
+    "Accord/3.8.0": {
+      "sha512": "7kJrB570dO5ELim+2KWQNozuvWO9/BuZfZspdFy36fcWPNF2CEccblLuILeUlI8QJYd2DlBy0bfK8BlCx/uayA==",
+      "type": "package",
+      "path": "accord/3.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "accord.3.8.0.nupkg.sha512",
+        "accord.nuspec",
+        "build/Accord.dll.config",
+        "build/Accord.targets",
+        "lib/net35-unity full v3.5/Accord.dll",
+        "lib/net35-unity full v3.5/Accord.xml",
+        "lib/net35-unity micro v3.5/Accord.dll",
+        "lib/net35-unity micro v3.5/Accord.xml",
+        "lib/net35-unity subset v3.5/Accord.dll",
+        "lib/net35-unity subset v3.5/Accord.xml",
+        "lib/net35-unity web v3.5/Accord.dll",
+        "lib/net35-unity web v3.5/Accord.xml",
+        "lib/net35/Accord.dll",
+        "lib/net35/Accord.xml",
+        "lib/net40/Accord.dll",
+        "lib/net40/Accord.xml",
+        "lib/net45/Accord.dll",
+        "lib/net45/Accord.xml",
+        "lib/net46/Accord.dll",
+        "lib/net46/Accord.xml",
+        "lib/net462/Accord.dll",
+        "lib/net462/Accord.xml",
+        "lib/netstandard1.4/Accord.dll",
+        "lib/netstandard1.4/Accord.xml",
+        "lib/netstandard2.0/Accord.dll",
+        "lib/netstandard2.0/Accord.xml"
+      ]
+    },
+    "Accord.Video/3.8.0": {
+      "sha512": "efsmrydC22ZEisWkukqAiCtv27qF0l5/9U1eCCTkbnc5EYYE6F2RSnsfWr8iTELXb3ZsLLGO+Sy+K0NXrHDv4A==",
+      "type": "package",
+      "path": "accord.video/3.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "accord.video.3.8.0.nupkg.sha512",
+        "accord.video.nuspec",
+        "lib/net35-unity full v3.5/Accord.Video.dll",
+        "lib/net35-unity full v3.5/Accord.Video.xml",
+        "lib/net35-unity micro v3.5/Accord.Video.dll",
+        "lib/net35-unity micro v3.5/Accord.Video.xml",
+        "lib/net35-unity subset v3.5/Accord.Video.dll",
+        "lib/net35-unity subset v3.5/Accord.Video.xml",
+        "lib/net35-unity web v3.5/Accord.Video.dll",
+        "lib/net35-unity web v3.5/Accord.Video.xml",
+        "lib/net35/Accord.Video.dll",
+        "lib/net35/Accord.Video.xml",
+        "lib/net40/Accord.Video.dll",
+        "lib/net40/Accord.Video.xml",
+        "lib/net45/Accord.Video.dll",
+        "lib/net45/Accord.Video.xml",
+        "lib/net46/Accord.Video.dll",
+        "lib/net46/Accord.Video.xml",
+        "lib/net462/Accord.Video.dll",
+        "lib/net462/Accord.Video.xml",
+        "lib/netstandard2.0/Accord.Video.dll",
+        "lib/netstandard2.0/Accord.Video.xml"
+      ]
+    },
+    "Accord.Video.FFMPEG/3.8.0": {
+      "sha512": "so18O2AdHnwGz8+yyUG7uVuBRqymqB0pVwDSTNCwG7Qq9SgnpvkZCTKMbRGGy9B1r3nbqSSHsQNeWP9k6LNWOw==",
+      "type": "package",
+      "path": "accord.video.ffmpeg/3.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "accord.video.ffmpeg.3.8.0.nupkg.sha512",
+        "accord.video.ffmpeg.nuspec",
+        "build/Accord.Video.FFMPEG.targets",
+        "build/FFMPEG-README.txt",
+        "build/avcodec-57.dll",
+        "build/avdevice-57.dll",
+        "build/avfilter-6.dll",
+        "build/avformat-57.dll",
+        "build/avutil-55.dll",
+        "build/postproc-54.dll",
+        "build/swresample-2.dll",
+        "build/swscale-4.dll",
+        "lib/net35/Accord.Video.FFMPEG.dll",
+        "lib/net35/Accord.Video.FFMPEG.xml",
+        "lib/net40/Accord.Video.FFMPEG.dll",
+        "lib/net40/Accord.Video.FFMPEG.xml",
+        "lib/net45/Accord.Video.FFMPEG.dll",
+        "lib/net45/Accord.Video.FFMPEG.xml",
+        "lib/net46/Accord.Video.FFMPEG.dll",
+        "lib/net46/Accord.Video.FFMPEG.xml",
+        "lib/net462/Accord.Video.FFMPEG.dll",
+        "lib/net462/Accord.Video.FFMPEG.xml"
+      ]
+    },
+    "Accord.Video.FFMPEG.x64/3.8.0": {
+      "sha512": "eYHbjfn6AlYPjhaPBWy6Hyjnw5lbWzBQ43GzwsQQcAMgsYB6sK7kwh5yTHns4UycI2v0Y/I/WVXJdOcpaiK3Xw==",
+      "type": "package",
+      "path": "accord.video.ffmpeg.x64/3.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "accord.video.ffmpeg.x64.3.8.0.nupkg.sha512",
+        "accord.video.ffmpeg.x64.nuspec",
+        "build/Accord.Video.FFMPEG.x64.targets",
+        "build/FFMPEG-README.txt",
+        "build/avcodec-57.dll",
+        "build/avdevice-57.dll",
+        "build/avfilter-6.dll",
+        "build/avformat-57.dll",
+        "build/avutil-55.dll",
+        "build/postproc-54.dll",
+        "build/swresample-2.dll",
+        "build/swscale-4.dll",
+        "lib/net40/Accord.Video.FFMPEG.x64.dll",
+        "lib/net40/Accord.Video.FFMPEG.x64.xml",
+        "lib/net45/Accord.Video.FFMPEG.x64.dll",
+        "lib/net45/Accord.Video.FFMPEG.x64.xml",
+        "lib/net46/Accord.Video.FFMPEG.x64.dll",
+        "lib/net46/Accord.Video.FFMPEG.x64.xml",
+        "lib/net462/Accord.Video.FFMPEG.x64.dll",
+        "lib/net462/Accord.Video.FFMPEG.x64.xml"
+      ]
+    },
+    "CliWrap/3.6.6": {
+      "sha512": "8/WnYKDjXjqMp9ktCygmeC6kDsmSEKF4riEYNy98+nD3wOKbuxqOjmhiFMalOYlM+mUqfs3SOEowF20+loDZHQ==",
+      "type": "package",
+      "path": "cliwrap/3.6.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cliwrap.3.6.6.nupkg.sha512",
+        "cliwrap.nuspec",
+        "favicon.png",
+        "lib/net462/CliWrap.dll",
+        "lib/net462/CliWrap.xml",
+        "lib/netcoreapp3.0/CliWrap.dll",
+        "lib/netcoreapp3.0/CliWrap.xml",
+        "lib/netstandard2.0/CliWrap.dll",
+        "lib/netstandard2.0/CliWrap.xml",
+        "lib/netstandard2.1/CliWrap.dll",
+        "lib/netstandard2.1/CliWrap.xml"
+      ]
+    },
     "Microsoft.AspNetCore.Connections.Abstractions/2.2.0": {
       "sha512": "Aqr/16Cu5XmGv7mLKJvXRxhhd05UJ7cTTSaUV4MZ3ynAzfgWjsAdpIU8FWuxwAjmVdmI8oOWuVDrbs+sRkhKnA==",
       "type": "package",
@@ -2138,6 +2434,57 @@
         "microsoft.openapi.nuspec"
       ]
     },
+    "Microsoft.Win32.SystemEvents/7.0.0": {
+      "sha512": "2nXPrhdAyAzir0gLl8Yy8S5Mnm/uBSQQA7jEsILOS1MTyS7DbmV1NgViMtvV1sfCD1ebITpNwb1NIinKeJgUVQ==",
+      "type": "package",
+      "path": "microsoft.win32.systemevents/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
+        "lib/net462/Microsoft.Win32.SystemEvents.dll",
+        "lib/net462/Microsoft.Win32.SystemEvents.xml",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/net7.0/Microsoft.Win32.SystemEvents.xml",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
+        "microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+        "microsoft.win32.systemevents.nuspec",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.xml",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "SharpAvi/3.0.1": {
+      "sha512": "5JZVlAlrY8cirElTpMHdUjTI5xNeaGY8bhS3e9o9zQZsqgeFON+wVmRDiFqJSZDM2ympv7hpXtVywHyzBvaK8w==",
+      "type": "package",
+      "path": "sharpavi/3.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/SharpAvi.dll",
+        "lib/net45/SharpAvi.xml",
+        "lib/net5.0-windows7.0/SharpAvi.dll",
+        "lib/net5.0-windows7.0/SharpAvi.xml",
+        "lib/net5.0/SharpAvi.dll",
+        "lib/net5.0/SharpAvi.xml",
+        "lib/netstandard2.0/SharpAvi.dll",
+        "lib/netstandard2.0/SharpAvi.xml",
+        "readme.md",
+        "sharpavi.3.0.1.nupkg.sha512",
+        "sharpavi.nuspec"
+      ]
+    },
     "System.Buffers/4.5.0": {
       "sha512": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
       "type": "package",
@@ -2224,6 +2571,43 @@
         "runtimes/win/lib/net7.0/System.Diagnostics.EventLog.xml",
         "system.diagnostics.eventlog.7.0.0.nupkg.sha512",
         "system.diagnostics.eventlog.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Drawing.Common/7.0.0": {
+      "sha512": "KIX+oBU38pxkKPxvLcLfIkOV5Ien8ReN78wro7OF5/erwcmortzeFx+iBswlh2Vz6gVne0khocQudGwaO1Ey6A==",
+      "type": "package",
+      "path": "system.drawing.common/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Drawing.Common.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net462/System.Drawing.Common.dll",
+        "lib/net462/System.Drawing.Common.xml",
+        "lib/net6.0/System.Drawing.Common.dll",
+        "lib/net6.0/System.Drawing.Common.xml",
+        "lib/net7.0/System.Drawing.Common.dll",
+        "lib/net7.0/System.Drawing.Common.xml",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "runtimes/win/lib/net6.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/net6.0/System.Drawing.Common.xml",
+        "runtimes/win/lib/net7.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/net7.0/System.Drawing.Common.xml",
+        "system.drawing.common.7.0.0.nupkg.sha512",
+        "system.drawing.common.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -2601,42 +2985,79 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "System.Windows.Extensions/7.0.0": {
+      "sha512": "bR4qdCmssMMbo9Fatci49An5B1UaVJZHKNq70PRgzoLYIlitb8Tj7ns/Xt5Pz1CkERiTjcVBDU2y1AVrPBYkaw==",
+      "type": "package",
+      "path": "system.windows.extensions/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/System.Windows.Extensions.dll",
+        "lib/net6.0/System.Windows.Extensions.xml",
+        "lib/net7.0/System.Windows.Extensions.dll",
+        "lib/net7.0/System.Windows.Extensions.xml",
+        "runtimes/win/lib/net6.0/System.Windows.Extensions.dll",
+        "runtimes/win/lib/net6.0/System.Windows.Extensions.xml",
+        "runtimes/win/lib/net7.0/System.Windows.Extensions.dll",
+        "runtimes/win/lib/net7.0/System.Windows.Extensions.xml",
+        "system.windows.extensions.7.0.0.nupkg.sha512",
+        "system.windows.extensions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
     }
   },
   "projectFileDependencyGroups": {
-    "net7.0": [
+    "net7.0-windows7.0": [
+      "Accord.Video.FFMPEG >= 3.8.0",
+      "Accord.Video.FFMPEG.x64 >= 3.8.0",
+      "CliWrap >= 3.6.6",
       "Microsoft.AspNetCore.Hosting >= 2.2.7",
       "Microsoft.AspNetCore.OpenApi >= 7.0.20",
       "Microsoft.AspNetCore.Server.Kestrel >= 2.2.0",
       "Microsoft.Extensions.Hosting >= 7.0.1",
       "Microsoft.Extensions.Hosting.Systemd >= 7.0.0",
-      "Microsoft.Extensions.Hosting.WindowsServices >= 7.0.1"
+      "Microsoft.Extensions.Hosting.WindowsServices >= 7.0.1",
+      "SharpAvi >= 3.0.1",
+      "System.Drawing.Common >= 7.0.0",
+      "System.Windows.Extensions >= 7.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lrvad\\.nuget\\packages\\": {}
+    "C:\\Users\\lrvad\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\NexiumService.csproj",
+      "projectUniqueName": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj",
       "projectName": "NexiumService",
-      "projectPath": "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\NexiumService.csproj",
+      "projectPath": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj",
       "packagesPath": "C:\\Users\\lrvad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\obj\\",
+      "outputPath": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\lrvad\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\lrvad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net7.0"
+        "net7.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
           "projectReferences": {}
         }
       },
@@ -2647,9 +3068,21 @@
       }
     },
     "frameworks": {
-      "net7.0": {
-        "targetAlias": "net7.0",
+      "net7.0-windows7.0": {
+        "targetAlias": "net7.0-windows",
         "dependencies": {
+          "Accord.Video.FFMPEG": {
+            "target": "Package",
+            "version": "[3.8.0, )"
+          },
+          "Accord.Video.FFMPEG.x64": {
+            "target": "Package",
+            "version": "[3.8.0, )"
+          },
+          "CliWrap": {
+            "target": "Package",
+            "version": "[3.6.6, )"
+          },
           "Microsoft.AspNetCore.Hosting": {
             "target": "Package",
             "version": "[2.2.7, )"
@@ -2673,6 +3106,18 @@
           "Microsoft.Extensions.Hosting.WindowsServices": {
             "target": "Package",
             "version": "[7.0.1, )"
+          },
+          "SharpAvi": {
+            "target": "Package",
+            "version": "[3.0.1, )"
+          },
+          "System.Drawing.Common": {
+            "target": "Package",
+            "version": "[7.0.0, )"
+          },
+          "System.Windows.Extensions": {
+            "target": "Package",
+            "version": "[7.0.0, )"
           }
         },
         "imports": [
@@ -2692,9 +3137,12 @@
           },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,30 +1,37 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\NexiumService.csproj": {}
+    "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\NexiumService.csproj": {
+    "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\NexiumService.csproj",
+        "projectUniqueName": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj",
         "projectName": "NexiumService",
-        "projectPath": "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\NexiumService.csproj",
+        "projectPath": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj",
         "packagesPath": "C:\\Users\\lrvad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lrvad\\Documents\\GitHub\\service\\NexiumService\\obj\\",
+        "outputPath": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lrvad\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\lrvad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net7.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net7.0-windows7.0": {
+            "targetAlias": "net7.0-windows",
             "projectReferences": {}
           }
         },
@@ -35,9 +42,21 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
           "dependencies": {
+            "Accord.Video.FFMPEG": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "Accord.Video.FFMPEG.x64": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "CliWrap": {
+              "target": "Package",
+              "version": "[3.6.6, )"
+            },
             "Microsoft.AspNetCore.Hosting": {
               "target": "Package",
               "version": "[2.2.7, )"
@@ -61,6 +80,18 @@
             "Microsoft.Extensions.Hosting.WindowsServices": {
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "SharpAvi": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Windows.Extensions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -80,9 +111,12 @@
             },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

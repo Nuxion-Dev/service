@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Nodes;
+﻿using System.Diagnostics;
+using System.Text.Json.Nodes;
 using NexiumService.Modules;
 using NexiumService.Utils;
 
@@ -7,7 +8,14 @@ namespace NexiumService.Launchers;
 public interface ILauncher
 {
     protected static List<GameInfo> InstalledGames;
-    private static List<ILauncher> RegisteredLaunchers;
+    protected static List<GameInfo> RunningGames = new List<GameInfo>();
+    private static List<ILauncher> RegisteredLaunchers = new List<ILauncher>()
+    {
+        new Steam(),
+        new EpicGames(),
+        new Minecraft(),
+        new EA()
+    };
     
     public string GetLauncherName();
     
@@ -34,11 +42,15 @@ public interface ILauncher
         foreach (var game in games)
         {
             if (game == null) continue;
+            if (game["DisplayName"] == null) continue;
 
+            string name = game["Name"].GetValue<string>();
             string displayName = game["DisplayName"].GetValue<string>();
-            string bannerImage = game["BannerImage"].GetValue<string>();
+            string? bannerImage = game["BannerImage"]?.GetValue<string>();
             long lastPlayed = game["LastPlayed"].GetValue<long>();
             bool favourite = game["Favourite"].GetValue<bool>();
+            int shortcutSlot = game["ShortcutSlot"].GetValue<int>();
+            bool customBanner = game["CustomBanner"] == null ? false : game["CustomBanner"].GetValue<bool>();
             string launcherLocation = game["LauncherLocation"].GetValue<string>();
             string launcherName = game["LauncherName"].GetValue<string>();
             string gameId = game["GameId"].GetValue<string>();
@@ -50,10 +62,13 @@ public interface ILauncher
 
             GameInfo info = new GameInfo
             {
+                Name = name,
                 DisplayName = displayName,
                 BannerImage = bannerImage,
                 LastPlayed = lastPlayed,
                 Favourite = favourite,
+                ShortcutSlot = shortcutSlot,
+                CustomBanner = customBanner,
                 LauncherLocation = launcherLocation,
                 LauncherName = launcherName,
                 GameId = gameId,
@@ -64,11 +79,8 @@ public interface ILauncher
                 GameDir = gameDir
             };
             InstalledGames.Add(info);
-            info.DownloadBanner();
+            if (!customBanner) info.DownloadBanner();
         }
-        
-        RegisteredLaunchers = new List<ILauncher>();
-        RegisteredLaunchers.Add(new Steam());
         
         foreach (var launcher in RegisteredLaunchers)
         {
@@ -78,12 +90,8 @@ public interface ILauncher
     
     public static List<GameInfo> GetInstalledGames()
     {
+        InstalledGames.Sort((x, y) => string.Compare(x.DisplayName, y.DisplayName, StringComparison.Ordinal));
         return InstalledGames;
-    }
-    
-    public static void AddCustomGame(GameInfo game)
-    {
-        InstalledGames.Add(game);
     }
     
     public static void RegisterLauncher(ILauncher launcher)
@@ -111,18 +119,71 @@ public interface ILauncher
         return InstalledGames.Find(x => x.GameId == gameId);
     }
     
-    public static void UpdateGame(GameInfo game)
+    public static void UpdateGame(GameInfo possibleGame)
     {
-        var oldGame = InstalledGames.Find(x => x.GameId == game.GameId);
-        InstalledGames.Remove(oldGame);
+        var game = InstalledGames.Find(x => x.GameId == possibleGame.GameId);
+        InstalledGames.Remove(game);
+        
+        game.DisplayName = possibleGame.DisplayName;
+        game.BannerImage = possibleGame.BannerImage;
+        game.LastPlayed = possibleGame.LastPlayed;
+        game.Favourite = possibleGame.Favourite;
+        game.ShortcutSlot = possibleGame.ShortcutSlot;
+        game.CustomBanner = possibleGame.CustomBanner;
+        game.LauncherLocation = possibleGame.LauncherLocation;
+        game.LauncherName = possibleGame.LauncherName;
+        game.GameId = possibleGame.GameId;
+        game.GameSize = possibleGame.GameSize;
+        game.LaunchCommand = possibleGame.LaunchCommand;
+        game.LaunchArgs = possibleGame.LaunchArgs;
+        game.ExeFile = possibleGame.ExeFile;
+        game.GameDir = possibleGame.GameDir;
+        
         InstalledGames.Add(game);
+        InstalledGames.Sort((x, y) => string.Compare(x.DisplayName, y.DisplayName, StringComparison.Ordinal));
         
         var storage = new Storage("games/games.json");
         var obj = storage.Read();
         var games = obj["games"].AsArray();
-        games.Remove(games.FirstOrDefault(x => x["GameId"].GetValue<string>() == game.GameId));
-        games.Add(JsonNode.Parse(game.ToJson()));
+        for (int i = 0; i < games.Count; i++)
+        {
+            if (games[i]["GameId"].GetValue<string>() == game.GameId)
+            {
+                games[i] = JsonNode.Parse(game.ToJson());
+            }
+        }
+        
         obj["games"] = games;
         storage.Write(obj);
+    }
+    
+    public static List<GameInfo> GetRunningGames()
+    {
+        return RunningGames;
+    }
+    
+    public static bool IsGameRunning(string gameId)
+    {
+        return RunningGames.Any(x => x.GameId == gameId);
+    }
+
+    /**
+     * Set the shortcut slot for a game
+     * @param info GameInfo object
+     * @param slot Slot number, 0-2 (premium 0-5)
+     * @return void
+     */
+    public static void SetShortcut(GameInfo info, int slot)
+    {
+        GameInfo? slotTaken = InstalledGames.Find(x => x.ShortcutSlot == slot);
+        if (slotTaken != null)
+        {
+            GameInfo slotTakenCopy = (GameInfo) slotTaken;
+            slotTakenCopy.ShortcutSlot = -1;
+            UpdateGame(slotTakenCopy);
+        }
+        
+        info.ShortcutSlot = slot;
+        UpdateGame(info);
     }
 }
