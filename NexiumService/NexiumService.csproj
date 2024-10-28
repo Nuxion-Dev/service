@@ -10,8 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Accord.Video.FFMPEG" Version="3.8.0" />
-        <PackageReference Include="Accord.Video.FFMPEG.x64" Version="3.8.0" />
         <PackageReference Include="CliWrap" Version="3.6.6" />
         <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.20" />

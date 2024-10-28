@@ -13,8 +13,7 @@ public interface ILauncher
     {
         new Steam(),
         new EpicGames(),
-        new Minecraft(),
-        new EA()
+        new Minecraft()
     };
     
     public string GetLauncherName();
@@ -79,13 +78,21 @@ public interface ILauncher
                 GameDir = gameDir
             };
             InstalledGames.Add(info);
-            if (!customBanner) info.DownloadBanner();
+            Thread thread = new Thread(() => info.DownloadBanner());
+            thread.Start();
         }
         
         foreach (var launcher in RegisteredLaunchers)
         {
-            launcher.DetectGames();
+            Thread thread2 = new Thread(() => launcher.DetectGames());
+            thread2.Start();
         }
+        
+        Thread thread3 = new Thread(() =>
+        {
+            Thread.Sleep(5000);
+            GameUtil.CheckRunningGames();
+        });
     }
     
     public static List<GameInfo> GetInstalledGames()
@@ -160,6 +167,12 @@ public interface ILauncher
     public static List<GameInfo> GetRunningGames()
     {
         return RunningGames;
+    }
+    
+    public static void SetRunningGames(List<GameInfo> info)
+    {
+        RunningGames.Clear();
+        RunningGames.AddRange(info);
     }
     
     public static bool IsGameRunning(string gameId)

@@ -24,12 +24,13 @@ public class CustomGame : ILauncher
     
     public void LaunchGame(GameInfo info)
     {
+        var gameDir = info.GameDir;
         var exe = info.ExeFile;
         var args = info.LaunchArgs;
         
         var process = new ProcessStartInfo
         {
-            FileName = exe,
+            FileName = Path.Join(gameDir, exe),
             Arguments = args,
             UseShellExecute = false,
             RedirectStandardOutput = true,
@@ -41,8 +42,8 @@ public class CustomGame : ILauncher
     }
     
     public static GameInfo AddGame(string name, string? banner, string exe, string args)
-    {
-       var info = new GameInfo
+    { 
+        var info = new GameInfo
         {
             DisplayName = name,
             BannerImage = banner,

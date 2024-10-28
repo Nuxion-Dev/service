@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using NexiumService;
-using NexiumService.Clips;
 using NexiumService.Launchers;
 using NexiumService.Modules;
 
 public class Program
 {
-    public static Recorder ScreenRecorder;
-    
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);

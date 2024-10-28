@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "5CnOLhkXJWLZ+71aWtjF1MMgNE1UxR8KlL+lQdggnhVsJ8ZZ5Uyt4ivaqqOKNJWMCBgmL5H3fTPEp4z48fIGNA==",
+  "dgSpecHash": "xHoQwKXHrHW61jG79D/uwMgepMyLDdPDoNxVY+eyhvEkhILoVTPT9z8P6H+84L2LW9lADOTLp4d66yLM51hggg==",
   "success": true,
   "projectFilePath": "C:\\Users\\lrvad\\OneDrive\\Dokumenter\\Coding\\Nexium\\service\\NexiumService\\NexiumService.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\lrvad\\.nuget\\packages\\accord\\3.8.0\\accord.3.8.0.nupkg.sha512",
-    "C:\\Users\\lrvad\\.nuget\\packages\\accord.video\\3.8.0\\accord.video.3.8.0.nupkg.sha512",
-    "C:\\Users\\lrvad\\.nuget\\packages\\accord.video.ffmpeg\\3.8.0\\accord.video.ffmpeg.3.8.0.nupkg.sha512",
-    "C:\\Users\\lrvad\\.nuget\\packages\\accord.video.ffmpeg.x64\\3.8.0\\accord.video.ffmpeg.x64.3.8.0.nupkg.sha512",
     "C:\\Users\\lrvad\\.nuget\\packages\\cliwrap\\3.6.6\\cliwrap.3.6.6.nupkg.sha512",
     "C:\\Users\\lrvad\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\2.2.0\\microsoft.aspnetcore.connections.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\lrvad\\.nuget\\packages\\microsoft.aspnetcore.hosting\\2.2.7\\microsoft.aspnetcore.hosting.2.2.7.nupkg.sha512",

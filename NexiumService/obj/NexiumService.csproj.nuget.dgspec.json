@@ -45,14 +45,6 @@
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
           "dependencies": {
-            "Accord.Video.FFMPEG": {
-              "target": "Package",
-              "version": "[3.8.0, )"
-            },
-            "Accord.Video.FFMPEG.x64": {
-              "target": "Package",
-              "version": "[3.8.0, )"
-            },
             "CliWrap": {
               "target": "Package",
               "version": "[3.6.6, )"
